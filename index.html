@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drelife — Moda, segunda mano oficial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================
+   DRELIFE — Deporte, segunda mano oficial
+   Dark, sport-tech, editorial. Lime accent on near-black.
+=========================================================== */
+
+:root{
+  --bg: #1D1712;
+  --bg-soft: #241C15;
+  --lime: #F4A6C1;
+  --white: #FAF6EE;
+  --gray: #B7A997;
+  --gray-dim: #6B5D4E;
+  --line: #33291F;
+  --line-light: #E8DECD;
+
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', 'Times New Roman', serif;
+
+  --radius-l: 28px;
+  --radius-m: 20px;
+  --radius-s: 16px;
+
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:var(--font);
+  line-height:1.4;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+img{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; border:none; background:none; cursor:pointer; color:inherit; }
+
+.lime{ color:var(--lime); }
+
+/* En secciones de fondo claro el texto lime pierde contraste:
+   se muestra en negro con subrayado neón en su lugar. */
+.services .lime,
+.why-matters .lime,
+.how-we-work .lime,
+.resale-process .lime{
+  color:var(--bg);
+  text-decoration:underline;
+  text-decoration-color:var(--lime);
+  text-decoration-thickness:.14em;
+  text-underline-offset:.08em;
+  text-decoration-skip-ink:none;
+}
+
+::selection{ background:var(--lime); color:var(--bg); }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+}
+
+:focus-visible{ outline:2px solid var(--lime); outline-offset:3px; }
+
+/* ---------- utility ---------- */
+.eyebrow{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gray);
+}
+.eyebrow--light{ color:var(--gray); }
+.eyebrow--dark{ color:var(--gray-dim); }
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:13px 24px;
+  border-radius:100px;
+  font-size:14px;
+  font-weight:600;
+  transition:transform .25s var(--ease), background .25s var(--ease), color .25s var(--ease);
+  white-space:nowrap;
+}
+.btn--sm{ padding:10px 18px; font-size:13px; }
+.btn--lime{ background:var(--lime); color:var(--bg); }
+.btn--lime:hover{ transform:translateY(-2px); }
+.btn--ghost{ background:transparent; color:var(--white); border:1px solid var(--line); }
+.btn--ghost:hover{ border-color:var(--gray); }
+.btn--outline{ border:1px solid var(--line); color:var(--white); }
+.btn--outline:hover{ background:var(--white); color:var(--bg); }
+.btn--outline-lime{ border:1px solid var(--lime); color:var(--lime); }
+.btn--outline-lime:hover{ background:var(--lime); color:var(--bg); }
+
+.link-arrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-weight:600; font-size:14px; color:var(--bg);
+  border-bottom:1px solid var(--bg);
+  padding-bottom:2px;
+  transition:gap .25s var(--ease);
+}
+.link-arrow:hover{ gap:12px; }
+
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .7s var(--ease), transform .7s var(--ease);
+}
+.reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+/* =========================================================
+   HEADER
+========================================================= */
+.header{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:100;
+  background:rgba(29,23,18,0);
+  border-bottom:1px solid transparent;
+  transition:background .3s var(--ease), border-color .3s var(--ease), backdrop-filter .3s var(--ease);
+}
+.header.is-scrolled{
+  background:rgba(29,23,18,.86);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.header__inner{
+  max-width:1400px;
+  margin:0 auto;
+  padding:18px 40px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.header__brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.header__dot{
+  width:8px; height:8px; border-radius:50%;
+  background:var(--lime);
+  flex:none;
+}
+.header__logo{
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+.header__tagline{
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.12em;
+  color:var(--gray);
+  padding-left:12px;
+  border-left:1px solid var(--line);
+}
+.header__actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.burger{
+  width:38px; height:38px;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:5px;
+  border:1px solid var(--line);
+  border-radius:50%;
+}
+.burger span{
+  width:14px; height:1.5px; background:var(--white);
+  transition:transform .3s var(--ease), opacity .3s var(--ease);
+}
+.burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu{
+  position:fixed;
+  inset:0;
+  z-index:99;
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:18px;
+  padding:40px;
+  overflow-y:auto;
+  transform:translateY(-100%);
+  transition:transform .4s var(--ease);
+}
+.mobile-menu.is-open{ transform:translateY(0); }
+.mobile-menu a{ font-size:22px; font-weight:700; }
+
+/* =========================================================
+   HERO
+========================================================= */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:120px 40px 0;
+  overflow:hidden;
+}
+.hero__bg{ position:absolute; inset:0; z-index:0; }
+.hero__img{ width:100%; height:100%; object-fit:cover; }
+.hero__overlay{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(180deg, rgba(29,23,18,.55) 0%, rgba(29,23,18,.35) 40%, rgba(29,23,18,.85) 100%),
+    linear-gradient(90deg, rgba(29,23,18,.75) 0%, rgba(29,23,18,.15) 55%, rgba(29,23,18,.05) 100%);
+}
+.hero__content{
+  position:relative;
+  z-index:2;
+  max-width:760px;
+}
+.hero__content .eyebrow{ color:var(--gray); margin-bottom:20px; }
+.hero__title{ font-family:var(--font-serif); font-weight:600;
+  font-size:clamp(48px, 7vw, 92px);
+  font-weight:800;
+  line-height:.98;
+  letter-spacing:-.03em;
+  margin-bottom:24px;
+}
+.hero__desc{
+  font-size:18px;
+  color:var(--gray);
+  max-width:420px;
+  margin-bottom:36px;
+}
+.hero__cta{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+}
+.hero__cta-icon{
+  width:44px; height:44px;
+  border:1px solid var(--line-light);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px;
+  transition:background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+}
+.hero__cta:hover .hero__cta-icon{
+  background:var(--lime); color:var(--bg); border-color:var(--lime);
+  transform:rotate(45deg);
+}
+
+.rail-nav{
+  position:absolute;
+  right:40px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:14px;
+}
+.rail-nav__item{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.1em;
+  color:var(--gray-dim);
+  transition:color .25s var(--ease);
+}
+.rail-nav__item.is-active{ color:var(--lime); }
+.rail-nav__item--dim{ opacity:.4; }
+.rail-nav a:hover{ color:var(--white); }
+
+.hero__metrics{
+  position:relative;
+  z-index:2;
+  margin-top:64px;
+  padding-top:28px;
+  border-top:1px solid rgba(250,246,238,.16);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+  padding-bottom:40px;
+}
+.metric{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.metric__value{
+  font-size:26px;
+  font-weight:800;
+  color:var(--lime);
+  letter-spacing:-.02em;
+}
+.metric__label{
+  font-size:14px;
+  color:var(--gray);
+  line-height:1.45;
+  max-width:220px;
+}
+.stat-source{
+  font-size:10px;
+  color:var(--gray-dim);
+  line-height:1.35;
+  max-width:200px;
+  opacity:.7;
+}
+
+/* =========================================================
+   SERVICES
+========================================================= */
+.services{
+  background:var(--white);
+  color:var(--bg);
+  padding:100px 40px;
+  border-radius:var(--radius-l) var(--radius-l) 0 0;
+}
+.services__top{ max-width:1400px; margin:0 auto 56px; }
+.services__heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:40px;
+  margin-top:20px;
+}
+.services__title{ font-family:var(--font-serif); font-weight:600;
+  font-size:clamp(36px, 5vw, 60px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-.02em;
+}
+.services__copy{
+  max-width:320px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.services__copy p{ color:var(--gray-dim); font-size:15px; line-height:1.6; }
+
+.services__grid{
+  max-width:1400px;
+  margin:56px auto 0;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:20px;
+}
+.card{
+  border-radius:var(--radius-m);
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  min-height:420px;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.card:hover{ transform:translateY(-10px); }
+.card--black{ background:var(--bg); color:var(--white); }
+.card--lime-frame{ border:2px solid var(--lime); }
+.card--light{ background:#F1E9DC; color:var(--bg); }
+.card--lime{ background:var(--lime); color:var(--bg); }
+
+.card__top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:auto;
+}
+.card__num{ font-size:12px; font-weight:700; opacity:.6; }
+.card__arrow{
+  width:34px; height:34px;
+  border:1px solid currentColor;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px;
+  opacity:.6;
+  transition:opacity .25s var(--ease), transform .25s var(--ease);
+}
+.card:hover .card__arrow{ opacity:1; transform:rotate(45deg); }
+
+.card__title{
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-.01em;
+  margin-top:28px;
+}
+.card__desc{
+  font-size:13px;
+  line-height:1.6;
+  opacity:.75;
+  margin-top:10px;
+  max-width:220px;
+}
+.card__img{
+  margin-top:20px;
+  border-radius:14px;
+  overflow:hidden;
+  height:140px;
+}
+.card__info-btn{
+  margin-top:16px;
+  align-self:flex-start;
+}
+.card__img img{ width:100%; height:100%; object-fit:cover; }
+
+/* =========================================================
+   SHARED — icon circle (reused across new sections)
+========================================================= */
+.icon-circle{
+  width:44px; height:44px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px;
+  flex:none;
+}
+.card--black .icon-circle,
+.card--light .icon-circle{ color:var(--lime); }
+.card--lime .icon-circle{ color:var(--bg); border-color:rgba(29,23,18,.3); }
+.icon-circle--featured{
+  border-color:var(--lime);
+  color:var(--lime);
+}
+
+/* Compact card variant: icon + title + text, no product image */
+.card--compact{ min-height:260px; }
+
+/* =========================================================
+   02 · ¿POR QUÉ AHORA?
+========================================================= */
+.why-now{
+  background:var(--bg);
+  padding:100px 40px;
+}
+.why-now__top{ max-width:1400px; margin:0 auto; }
+.why-now__title{ font-family:var(--font-serif); font-weight:600;
+  margin:20px 0 20px;
+  font-size:clamp(36px, 5vw, 60px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-.02em;
+}
+.why-now__subtitle{
+  max-width:620px;
+  color:var(--gray);
+  font-size:16px;
+  line-height:1.6;
+}
+.why-now__flow{
+  max-width:1400px;
+  margin:64px auto 0;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+.why-now__step{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:14px;
+  flex:1;
+}
+.why-now__step-label{
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-.01em;
+  color:var(--white);
+  line-height:1.35;
+}
+.why-now__step--leak .icon-circle{
+  border-style:dashed;
+  border-color:var(--lime);
+  color:var(--lime);
+}
+.why-now__step--leak .why-now__step-label{ color:var(--gray); }
+.why-now__arrow{
+  font-size:20px;
+  color:var(--gray-dim);
+  flex:none;
+  margin-top:10px;
+}
+.why-now__note{
+  max-width:1400px;
+  margin:48px auto 0;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:24px 28px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-m);
+  background:var(--bg-soft);
+}
+.why-now__note-icon{ font-size:20px; color:var(--lime); flex:none; }
+.why-now__note p{ font-size:17px; line-height:1.5; }
+.why-now__note strong{ color:var(--lime); }
+
+/* =========================================================
+   04 · VALOR PARA LAS MARCAS
+========================================================= */
+.brand-value{
+  background:var(--bg);
+  padding:100px 40px;
+}
+.brand-value__top{ max-width:1400px; margin:0 auto 48px; }
+.brand-value__title{ font-family:var(--font-serif); font-weight:600;
+  margin:20px 0 20px;
+  font-size:clamp(36px, 5vw, 60px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-.02em;
+}
+.brand-value__subtitle{
+  max-width:560px;
+  color:var(--gray);
+  font-size:16px;
+  line-height:1.6;
+}
+.brand-value__grid{
+  max-width:1400px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:20px;
+}
+
+/* =========================================================
+   05 · ¿POR QUÉ IMPORTA?
+========================================================= */
+.why-matters{
+  background:var(--white);
+  color:var(--bg);
+  padding:100px 40px;
+}
+.why-matters__top{
+  max-width:1400px;
+  margin:0 auto 56px;
+}
+.why-matters__title{ font-family:var(--font-serif); font-weight:600;
+  font-size:clamp(36px, 5vw, 60px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-top:20px;
+}
+.why-matters__grid{
+  max-width:1400px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:20px;
+}
+.why-matters .card__desc{ opacity:.7; }
+
+/* =========================================================
+   07 · LANDING PAGE + APP (ecosistema digital)
+========================================================= */
+.ecosystem{
+  background:var(--bg);
+  padding:100px 40px;
+  display:grid;
+  grid-template-columns:.7fr 1.3fr;
+  gap:60px;
+  align-items:center;
+}
+.ecosystem__content{ max-width:460px; }
+.ecosystem__title{ font-family:var(--font-serif); font-weight:600;
+  font-size:clamp(34px, 4.5vw, 52px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin:20px 0 22px;
+}
+.ecosystem__desc{
+  color:var(--gray);
+  font-size:15px;
+  line-height:1.6;
+  margin-bottom:32px;
+  max-width:400px;
+}
+.ecosystem__actions{ display:flex; gap:14px; flex-wrap:wrap; }
+
+.ecosystem__mockups{
+  position:relative;
+  width:100%;
+}
+.mockup{
+  border:1px dashed var(--line);
+  border-radius:var(--radius-m);
+  background:var(--bg-soft);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--gray-dim);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.mockup--desktop{
+  width:100%;
+  aspect-ratio:16/10;
+}
+
+/* ---------- Modal App (lightbox) ---------- */
+.app-modal{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .25s ease, visibility .25s ease;
+}
+.app-modal.is-open{
+  opacity:1;
+  visibility:visible;
+}
+.app-modal__backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(29,23,18,.85);
+}
+.app-modal__panel{
+  position:relative;
+  width:min(420px, 92vw);
+  height:min(860px, 90vh);
+  aspect-ratio:9/19.5;
+  background:var(--bg);
+  border-radius:var(--radius-m);
+  box-shadow:0 30px 70px rgba(0,0,0,.55);
+  transform:translateY(12px);
+  transition:transform .25s ease;
+  overflow:hidden;
+}
+.app-modal.is-open .app-modal__panel{
+  transform:translateY(0);
+}
+.app-modal__close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  z-index:1;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:var(--white);
+  color:var(--bg);
+  font-size:14px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.app-modal__close:hover{
+  background:var(--lime);
+}
+.app-modal__frame{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+.info-modal{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .25s ease, visibility .25s ease;
+  padding:24px;
+}
+.info-modal.is-open{
+  opacity:1;
+  visibility:visible;
+}
+.info-modal__backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(29,23,18,.85);
+}
+.info-modal__panel{
+  position:relative;
+  width:min(520px, 100%);
+  max-height:85vh;
+  overflow-y:auto;
+  background:var(--white);
+  color:var(--bg);
+  border-radius:var(--radius-m);
+  box-shadow:0 30px 70px rgba(0,0,0,.55);
+  padding:40px;
+  transform:translateY(12px);
+  transition:transform .25s ease;
+}
+.info-modal.is-open .info-modal__panel{
+  transform:translateY(0);
+}
+.info-modal__close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  z-index:1;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:var(--white);
+  color:var(--bg);
+  font-size:14px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.info-modal__close:hover{ background:var(--lime); }
+.info-modal__title{
+  font-size:26px;
+  font-weight:800;
+  letter-spacing:-.02em;
+  margin-top:10px;
+}
+.info-modal__list{
+  list-style:none;
+  margin-top:28px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.info-modal__list li{
+  padding-left:20px;
+  border-left:2px solid var(--lime);
+}
+.info-modal__list strong{
+  display:block;
+  font-size:15px;
+  font-weight:800;
+  margin-bottom:4px;
+}
+.info-modal__list p{
+  font-size:14px;
+  line-height:1.55;
+  opacity:.75;
+}
+
+/* =========================================================
+   08 · CÓMO TRABAJAMOS
+========================================================= */
+.how-we-work{
+  background:var(--white);
+  color:var(--bg);
+  padding:100px 40px;
+}
+.how-we-work__inner{
+  max-width:1400px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:.9fr 1fr;
+  gap:60px;
+}
+.how-we-work__title{ font-family:var(--font-serif); font-weight:600;
+  font-size:clamp(36px, 5vw, 58px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-top:20px;
+}
+.how-we-work__right{
+  display:flex;
+  flex-direction:column;
+}
+.work-block{
+  padding:28px 0;
+  border-bottom:1px solid var(--line-light);
+  display:grid;
+  grid-template-columns:60px 1fr;
+  grid-template-areas:
+    "num   title"
+    "num   desc";
+  column-gap:24px;
+  row-gap:8px;
+}
+.how-we-work__right .work-block:first-child{ padding-top:0; }
+.how-we-work__right .work-block:last-child{ border-bottom:none; }
+.work-block__num{
+  grid-area:num;
+  font-size:13px;
+  font-weight:700;
+  color:var(--gray-dim);
+}
+.work-block__title{
+  grid-area:title;
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:-.01em;
+}
+.work-block__desc{
+  grid-area:desc;
+  font-size:14px;
+  color:var(--gray-dim);
+  line-height:1.6;
+  max-width:400px;
+}
+
+/* =========================================================
+   09 · PROCESO DE IMPLEMENTACIÓN
+========================================================= */
+.rollout{
+  background:var(--bg);
+  padding:100px 40px 120px;
+}
+.rollout__top{
+  max-width:1400px;
+  margin:0 auto 64px;
+}
+.rollout__title{ font-family:var(--font-serif); font-weight:600;
+  font-size:clamp(36px, 5vw, 60px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-top:20px;
+}
+.timeline{
+  max-width:900px;
+  margin:0 auto;
+  position:relative;
+}
+.timeline::before{
+  content:'';
+  position:absolute;
+  left:21px;
+  top:8px;
+  bottom:8px;
+  width:1px;
+  background:var(--line);
+}
+.timeline__item{
+  position:relative;
+  display:grid;
+  grid-template-columns:44px 1fr;
+  gap:28px;
+  padding-bottom:44px;
+}
+.timeline__item:last-child{ padding-bottom:0; }
+.timeline__node{
+  width:44px; height:44px;
+  border-radius:50%;
+  background:var(--bg);
+  border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  z-index:1;
+}
+.timeline__node span{
+  width:8px; height:8px;
+  border-radius:50%;
+  background:var(--gray-dim);
+}
+.timeline__item--lime .timeline__node{ border-color:var(--lime); }
+.timeline__item--lime .timeline__node span{ background:var(--lime); }
+.timeline__body{
+  background:var(--bg-soft);
+  border:1px solid var(--line);
+  border-radius:var(--radius-m);
+  padding:24px 28px;
+}
+.timeline__head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:14px;
+  flex-wrap:wrap;
+}
+.timeline__name{
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:-.01em;
+}
+.timeline__week{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--lime);
+  border:1px solid rgba(255,106,69,.3);
+  border-radius:100px;
+  padding:5px 12px;
+  flex:none;
+}
+.timeline__tasks{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.timeline__tasks li{
+  font-size:14px;
+  color:var(--gray);
+  padding-left:16px;
+  position:relative;
+}
+.timeline__tasks li::before{
+  content:'';
+  position:absolute;
+  left:0; top:8px;
+  width:5px; height:1px;
+  background:var(--gray-dim);
+}
+
+/* =========================================================
+   03 · QUÉ OFRECEMOS
+========================================================= */
+.offer{
+  background:var(--bg);
+  padding:100px 40px;
+}
+.offer__top{
+  max-width:1400px;
+  margin:0 auto 56px;
+}
+.offer__title{ font-family:var(--font-serif); font-weight:600;
+  font-size:clamp(36px, 5vw, 60px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin:20px 0 20px;
+}
+.offer__subtitle{
+  max-width:520px;
+  color:var(--gray);
+  font-size:16px;
+  line-height:1.6;
+}
+.offer__grid{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:40px;
+}
+.offer-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:18px;
+  min-height:420px;
+}
+.offer-item .icon-circle{
+  width:68px;
+  height:68px;
+  font-size:26px;
+}
+.offer-item__title{
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:-.01em;
+}
+.offer-item__desc{
+  font-size:14px;
+  color:var(--gray);
+  line-height:1.6;
+  max-width:260px;
+}
+.offer-item__tags{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin-top:8px;
+}
+.tag{
+  font-size:12px;
+  font-weight:600;
+  color:var(--gray);
+  border:1px solid var(--line);
+  border-radius:100px;
+  padding:8px 16px;
+  white-space:nowrap;
+}
+
+/* =========================================================
+   04 · PROCESO RESALE
+========================================================= */
+.resale-process{
+  background:var(--white);
+  color:var(--bg);
+  padding:100px 40px 120px;
+}
+.resale-process__top{
+  max-width:1400px;
+  margin:0 auto 40px;
+}
+.resale-process__title{ font-family:var(--font-serif); font-weight:600;
+  font-size:clamp(36px, 5vw, 56px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin:20px 0 20px;
+}
+.resale-process__subtitle{
+  max-width:640px;
+  color:var(--gray-dim);
+  font-size:16px;
+  line-height:1.6;
+  margin-bottom:28px;
+}
+.resale-legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:28px;
+}
+.resale-legend__item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--gray-dim);
+}
+.resale-dot{
+  width:10px; height:10px;
+  border-radius:50%;
+  flex:none;
+}
+.resale-dot--client{ background:var(--lime); }
+.resale-dot--brand{ background:var(--bg); }
+.resale-dot--ops{ background:#C9B8A2; }
+
+/* --- desktop racetrack layout (idéntico a index2.html) --- */
+.rp-track-outer{
+  position:relative;
+  width:100%;
+  max-width:1400px;
+  margin:0 auto;
+  aspect-ratio:1200/780;
+}
+.rp-track-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+.rp-track-svg .rp-path{
+  fill:none;
+  stroke:var(--line-light);
+  stroke-width:2;
+}
+.rp-track-svg .rp-path--loop{
+  stroke:var(--lime);
+  stroke-width:2;
+  stroke-dasharray:2 9;
+  stroke-linecap:round;
+}
+
+.rp-node{
+  position:absolute;
+  left:0; top:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:230px;
+  text-align:center;
+  z-index:2;
+}
+.rp-node--top{ flex-direction:column-reverse; transform:translate(-50%,-100%); }
+.rp-node--bottom{ transform:translate(-50%,0); }
+
+.rp-node__icon{
+  width:56px; height:56px;
+  border-radius:50%;
+  border:1px solid var(--line-light);
+  background:var(--white);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px;
+  color:var(--bg);
+  flex:none;
+}
+.rp-node--client .rp-node__icon{ border-color:var(--lime); color:var(--bg); }
+.rp-node--brand .rp-node__icon{ background:var(--bg); border-color:var(--bg); color:var(--white); }
+.rp-node--ops .rp-node__icon{ background:#F1E9DC; border-color:var(--line-light); color:var(--bg); }
+
+.rp-node__num{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+  color:var(--lime);
+  margin-top:22px;
+}
+.rp-node--top .rp-node__num{ order:4; margin-top:0; }
+.rp-node__actor{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--gray-dim);
+  margin-top:6px;
+}
+.rp-node--top .rp-node__actor{ order:3; }
+.rp-node__title{
+  font-size:17px;
+  font-weight:800;
+  letter-spacing:-.01em;
+  margin-top:6px;
+  line-height:1.22;
+}
+.rp-node--top .rp-node__title{ order:2; margin-top:8px; margin-bottom:0; }
+.rp-node__desc{
+  font-size:13.5px;
+  line-height:1.5;
+  color:var(--gray-dim);
+  margin-top:5px;
+  max-width:210px;
+}
+.rp-node--top .rp-node__desc{ order:1; margin-top:6px; margin-bottom:22px; }
+
+/* --- mobile fallback list (idéntico a index2.html) --- */
+.rp-mobile{
+  display:none;
+  flex-direction:column;
+  margin-top:40px;
+}
+.rp-mobile .rp-mrow{
+  display:flex;
+  gap:16px;
+  padding:20px 0;
+  border-top:1px solid var(--line);
+}
+.rp-mobile .rp-mrow:first-child{ border-top:none; }
+.rp-mobile .rp-node__icon{ width:44px; height:44px; font-size:16px; }
+.rp-mnum{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+  color:var(--lime);
+  margin-bottom:4px;
+}
+.rp-mactor{
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--gray-dim);
+  margin-bottom:4px;
+}
+.rp-mtitle{ font-size:16px; font-weight:800; margin:0 0 4px; }
+.rp-mdesc{ font-size:14px; line-height:1.5; color:var(--gray-dim); margin:0; }
+
+.resale-process__note{
+  max-width:1400px;
+  margin:56px auto 0;
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  background:#F1E9DC;
+  border-radius:var(--radius-m);
+  padding:24px 28px;
+}
+.resale-process__note-icon{
+  width:36px; height:36px;
+  border:1px solid var(--line-light);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px;
+  color:var(--bg);
+  flex:none;
+}
+.resale-process__note p{
+  font-size:14px;
+  color:var(--gray-dim);
+  line-height:1.6;
+}
+.resale-process__note strong{ color:var(--bg); }
+
+/* =========================================================
+   FOOTER
+========================================================= */
+.footer{
+  background:var(--bg);
+  padding:40px;
+  border-top:1px solid var(--line);
+}
+.footer__inner{
+  max-width:1400px;
+  margin:0 auto;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  color:var(--gray-dim);
+  font-size:13px;
+}
+.footer__doc-link{ white-space:normal; text-align:center; max-width:280px; }
+
+/* =========================================================
+   RESPONSIVE — TABLET (≤ 1024px, target 768px)
+========================================================= */
+@media (max-width: 1024px){
+  .header__tagline{ display:none; }
+  .rail-nav{ display:none; }
+
+  .hero__metrics{ grid-template-columns:repeat(2,1fr); row-gap:32px; }
+
+  .services__heading{ flex-direction:column; align-items:flex-start; gap:24px; }
+  .services__grid{ grid-template-columns:repeat(2,1fr); }
+
+  .offer__grid{ grid-template-columns:repeat(2,1fr); gap:32px; }
+
+  .why-now__flow{ flex-wrap:wrap; row-gap:32px; }
+  .why-now__step{ flex:1 1 40%; }
+
+  .rp-track-outer{ display:none; }
+  .rp-mobile{ display:flex; }
+
+  .brand-value__grid,
+  .why-matters__grid{ grid-template-columns:repeat(2,1fr); }
+
+  .ecosystem{ grid-template-columns:1fr; }
+  .ecosystem__mockups{ margin-top:20px; }
+
+  .how-we-work__inner{ grid-template-columns:1fr; }
+  .how-we-work__right{ margin-top:36px; }
+
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE (≤ 640px, target 390px)
+========================================================= */
+@media (max-width: 640px){
+  .header__inner{ padding:14px 20px; }
+  .header__logo{ font-size:16px; }
+
+  .hero{ padding:100px 20px 0; align-items:flex-start; }
+  .hero__title{ font-size:clamp(38px, 12vw, 56px); }
+  .hero__desc{ font-size:15px; }
+  .hero__metrics{
+    grid-template-columns:1fr;
+    display:flex;
+    overflow-x:auto;
+    gap:20px;
+    scroll-snap-type:x mandatory;
+    padding-bottom:28px;
+    margin-top:44px;
+  }
+  .metric{ min-width:78%; scroll-snap-align:start; }
+
+  .services{ padding:70px 20px; border-radius:20px 20px 0 0; }
+  .services__grid{
+    grid-template-columns:none;
+    display:flex;
+    overflow-x:auto;
+    gap:16px;
+    scroll-snap-type:x mandatory;
+    margin:40px -20px 0;
+    padding:0 20px 8px;
+  }
+  .services__grid .card{ min-width:78%; scroll-snap-align:start; min-height:380px; }
+
+  .offer{ padding:70px 20px; }
+  .offer__grid{ grid-template-columns:1fr; gap:40px; }
+
+  .why-now{ padding:70px 20px; }
+  .why-now__flow{ flex-direction:column; align-items:stretch; gap:28px; margin-top:44px; }
+  .why-now__step{ flex-direction:row; text-align:left; }
+  .why-now__arrow{ transform:rotate(90deg); margin:0 0 0 22px; }
+  .why-now__note{ flex-direction:column; align-items:flex-start; gap:10px; }
+
+  .footer__inner{ flex-direction:column; gap:14px; align-items:flex-start; }
+  .footer__doc-link{ border-radius:16px; max-width:100%; }
+
+  .brand-value{ padding:70px 20px; }
+  .brand-value__grid{
+    grid-template-columns:none;
+    display:flex;
+    overflow-x:auto;
+    gap:16px;
+    scroll-snap-type:x mandatory;
+    margin:0 -20px;
+    padding:0 20px 8px;
+  }
+  .brand-value__grid .card{ min-width:78%; scroll-snap-align:start; }
+
+  .why-matters{ padding:70px 20px; }
+  .why-matters__grid{
+    grid-template-columns:none;
+    display:flex;
+    overflow-x:auto;
+    gap:16px;
+    scroll-snap-type:x mandatory;
+    margin:0 -20px;
+    padding:0 20px 8px;
+  }
+  .why-matters__grid .card{ min-width:78%; scroll-snap-align:start; }
+
+  .ecosystem{ padding:70px 20px; gap:44px; }
+  .ecosystem__actions .btn{ flex:1; justify-content:center; }
+  .mockup--desktop{ aspect-ratio:4/5; }
+
+  .how-we-work{ padding:70px 20px; }
+  .how-we-work__inner{ gap:0; }
+  .work-block{ grid-template-columns:40px 1fr; gap:16px; padding:22px 0; }
+
+  .rollout{ padding:70px 20px 80px; }
+  .timeline__item{ grid-template-columns:32px 1fr; gap:16px; }
+  .timeline__node{ width:32px; height:32px; }
+  .timeline__body{ padding:20px; }
+  .timeline::before{ left:15px; }
+
+  .resale-process{ padding:70px 20px 80px; }
+  .resale-legend{ flex-direction:column; gap:12px; }
+  .resale-process__note{ flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="header__inner">
+    <div class="header__brand">
+      <span class="header__dot"></span>
+      <span class="header__logo">Drelife</span>
+      <span class="header__tagline">MODA&nbsp;·&nbsp;SEGUNDA MANO OFICIAL</span>
+    </div>
+    <nav class="header__actions">
+      <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#servicios">Servicios</a>
+  <a href="#por-que-ahora">¿Por qué ahora?</a>
+  <a href="#productos">Qué ofrecemos</a>
+  <a href="#proceso-resale">Proceso Resale</a>
+  <a href="#retorno">¿Por qué importa?</a>
+  <a href="#plataforma">Ecosistema Digital</a>
+  <a href="#metodologia">Cómo trabajamos</a>
+  <a href="#implementacion">Implementación</a>
+  <a href="#marcas">Valor para las marcas</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <div class="hero__bg">
+    <img src="imagenes/portada.jpeg" alt="Prendas de la colección Brownie" class="hero__img">
+    <div class="hero__overlay"></div>
+  </div>
+
+  <div class="hero__content">
+    <p class="eyebrow">BROWNIE&nbsp;x&nbsp;DRELIFE&nbsp;·&nbsp; el siguiente capítulo de cada prenda Brownie.
+</p>
+    <h1 class="hero__title">
+      Prendas que pueden<br>
+      cambiar de armario.<br>
+      <span class="lime">Dentro del universo Brownie</span>
+    </h1>
+    <p class="hero__desc">Un ecosistema desde donde comprar, vender y compartir de forma segura las prendas de la comunidad Brownie dentro del propio canal de la marca.</p>
+    <a href="#servicios" class="hero__cta">
+      <span class="hero__cta-icon">↗</span>
+      <span>Nuestros servicios</span>
+    </a>
+  </div>
+
+  <div class="hero__metrics reveal">
+    <div class="metric">
+      <span class="metric__value">393.000M$</span>
+      <span class="metric__label">tamaño estimado del mercado global de moda de segunda mano en 2030</span>
+      <span class="stat-source">Fuente: ThredUp, 2026 Resale Report (GlobalData)</span>
+    </div>
+    <div class="metric">
+      <span class="metric__value">60%</span>
+      <span class="metric__label">de los españoles ha comprado ropa de segunda mano alguna vez</span>
+      <span class="stat-source">Fuente: EAE Business School, Informe Ropa de Segunda Mano 2025</span>
+    </div>
+    <div class="metric">
+      <span class="metric__value">473.000t</span>
+      <span class="metric__label">de CO₂ evitadas por la compraventa de artículos de segunda mano en España en 2025</span>
+      <span class="stat-source">Fuente: Wallapop, Modelo de Impacto</span>
+    </div>
+    <div class="metric">
+      <span class="metric__value">90%</span>
+      <span class="metric__label">de los menores de 35 años ha comprado en plataformas de segunda mano</span>
+      <span class="stat-source">Fuente: Wallapop, informe de tendencias de moda 2025</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS ============ -->
+<section class="services" id="servicios">
+  <div class="services__top reveal">
+    <p class="eyebrow eyebrow--dark">01&nbsp;&nbsp;SERVICIOS</p>
+    <div class="services__heading">
+      <h2 class="services__title">
+        Historias que continúan<br>
+        <span class="lime">después del primer armario.</span>
+      </h2>
+      <div class="services__copy">
+        <p>Drelife convierte construye un canal propio de segunda vida, donde cada prenda sigue formando parte del universo Brownie.</p>
+        <a href="#productos" class="link-arrow">Ver cómo funciona <span>↗</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="services__grid">
+    <article class="card card--black card--lime-frame reveal">
+      <div class="card__top">
+        <span class="card__num">01</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Resale</h3>
+      <p class="card__desc">Reventa de prendas pre-owned en tu canal oficial de segunda mano.</p>
+      <div class="card__img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg),var(--bg-soft));">
+        <span style="font-size:32px;color:var(--lime,#F4A6C1);">↻</span>
+      </div>
+      <button type="button" id="resaleInfoBtn" class="btn btn--outline-lime btn--sm card__info-btn">Más información</button>
+    </article>
+
+    <article class="card card--light reveal">
+      <div class="card__top">
+        <span class="card__num">02</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Repairs</h3>
+      <p class="card__desc">Reparación y revisión de cada prenda para alargar su vida útil.</p>
+      <div class="card__img" style="display:flex;align-items:center;justify-content:center;background:var(--line-light);">
+        <span style="font-size:32px;">✂</span>
+      </div>
+    </article>
+
+    <article class="card card--lime reveal">
+      <div class="card__top">
+        <span class="card__num">03</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Recycle</h3>
+      <p class="card__desc">Convertimos residuos textiles en nuevos recursos y cerramos el ciclo de vida de la prenda.</p>
+      <div class="card__img" style="display:flex;align-items:center;justify-content:center;background:rgba(29,23,18,.08);">
+        <span style="font-size:32px;">♻</span>
+      </div>
+    </article>
+
+    <article class="card card--black reveal">
+      <div class="card__top">
+        <span class="card__num">04</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Returns</h3>
+      <p class="card__desc">Gestiona devoluciones de forma inteligente y reduce su impacto ambiental.</p>
+      <div class="card__img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg),var(--bg-soft));">
+        <span style="font-size:32px;color:var(--lime,#F4A6C1);">▤</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 02 · ¿POR QUÉ AHORA? ============ -->
+<section class="why-now" id="por-que-ahora">
+  <div class="why-now__top reveal">
+    <p class="eyebrow eyebrow--light">02&nbsp;&nbsp;¿POR QUÉ AHORA?</p>
+    <h2 class="why-now__title">
+      El mercado de segunda mano<br>
+      <span class="lime">ya se mueve sin las marcas.</span>
+    </h2>
+    <p class="why-now__subtitle">Miles de prendas Brownie cambian de propietaria cada año. Pero lo hacen fuera de su control, en plataformas de terceros. Mientras el mercado de segunda mano continúa creciendo, las marcas pierden visibilidad, relación con sus clientas e información sobre el recorrido de sus productos.</p>
+  </div>
+
+  <div class="why-now__flow reveal">
+    <div class="why-now__step">
+      <span class="icon-circle icon-circle--featured">⊙</span>
+      <span class="why-now__step-label">Compra</span>
+    </div>
+    <span class="why-now__arrow">→</span>
+    <div class="why-now__step">
+      <span class="icon-circle icon-circle--featured">◉</span>
+      <span class="why-now__step-label">Uso</span>
+    </div>
+    <span class="why-now__arrow">→</span>
+    <div class="why-now__step why-now__step--leak">
+      <span class="icon-circle">↗</span>
+      <span class="why-now__step-label">Venta en una<br>plataforma externa</span>
+    </div>
+    <span class="why-now__arrow">→</span>
+    <div class="why-now__step why-now__step--leak">
+      <span class="icon-circle">◌</span>
+      <span class="why-now__step-label">Nueva<br>propietaria</span>
+    </div>
+  </div>
+
+  <div class="why-now__note reveal">
+    <span class="why-now__note-icon">⚠</span>
+    <p>Después de la primera compra, <strong>Brownie desaparece de la experiencia.</strong></p>
+  </div>
+</section>
+
+<!-- ============ 03 · QUÉ OFRECEMOS ============ -->
+<section class="offer" id="productos">
+  <div class="offer__top reveal">
+    <p class="eyebrow eyebrow--light">03&nbsp;&nbsp;QUÉ OFRECEMOS</p>
+    <h2 class="offer__title">
+      El triple motor<br>
+      <span class="lime">de Drelife.</span>
+    </h2>
+    <p class="offer__subtitle">Un producto tecnológico que digitaliza y escala el servicio, y una consultoría que crea, activa y hace crecer el canal.</p>
+  </div>
+
+  <div class="offer__grid">
+    <div class="offer-item reveal">
+      <span class="icon-circle icon-circle--featured">⚙</span>
+      <h3 class="offer-item__title">Producto tecnológico</h3>
+      <p class="offer-item__desc">Plataforma que permite impulsar tu canal de reventa oficial.</p>
+      <div class="offer-item__tags">
+        <span class="tag">Tecnología propia</span>
+        <span class="tag">Integración Plug &amp; Play</span>
+        <span class="tag">Escalabilidad</span>
+      </div>
+    </div>
+
+    <div class="offer-item reveal">
+      <span class="icon-circle icon-circle--featured">◎</span>
+      <h3 class="offer-item__title">Consultoría estratégica</h3>
+      <p class="offer-item__desc">Definimos la mejor estrategia y modelo para tu negocio circular.</p>
+      <div class="offer-item__tags">
+        <span class="tag">Estrategia personalizada</span>
+        <span class="tag">Modelo de negocio</span>
+        <span class="tag">Crecimiento</span>
+      </div>
+    </div>
+
+    <div class="offer-item reveal">
+      <span class="icon-circle icon-circle--featured">☀</span>
+      <h3 class="offer-item__title">Operaciones</h3>
+      <p class="offer-item__desc">Gestionamos tu canal de principio a fin para maximizar su rendimiento.</p>
+      <div class="offer-item__tags">
+        <span class="tag">Logística bidireccional</span>
+        <span class="tag">Soporte</span>
+        <span class="tag">Reacondicionamiento</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · PROCESO RESALE ============ -->
+<section class="resale-process" id="proceso-resale">
+  <div class="resale-process__top reveal">
+    <p class="eyebrow eyebrow--dark">04&nbsp;&nbsp;PROCESO RESALE</p>
+    <h2 class="resale-process__title">
+      De la prenda usada<br>
+      <span class="lime">a la nueva compra.</span>
+    </h2>
+    <p class="resale-process__subtitle">Un circuito continuo entre cliente, marca y Drelife que convierte cada prenda recuperada en una nueva oportunidad de venta dentro de vuestro propio ecosistema.</p>
+
+    <div class="resale-legend">
+      <span class="resale-legend__item"><span class="resale-dot resale-dot--client"></span>Cliente</span>
+      <span class="resale-legend__item"><span class="resale-dot resale-dot--brand"></span>Brownie · Dashboard</span>
+      <span class="resale-legend__item"><span class="resale-dot resale-dot--ops"></span>Drelife · Operaciones</span>
+    </div>
+  </div>
+
+  <div class="rp-track-outer reveal">
+    <svg class="rp-track-svg" viewBox="0 0 1200 780" preserveAspectRatio="none" aria-hidden="true">
+      <path class="rp-path" d="M140,260 L1060,260 A130,130 0 0 1 1060,520 L140,520"/>
+      <path class="rp-path rp-path--loop" d="M140,520 A130,130 0 0 1 140,260"/>
+    </svg>
+
+    <div class="rp-node rp-node--top rp-node--client" style="left:11.667%;top:33.333%;">
+      <span class="rp-node__icon">⊙</span>
+      <span class="rp-node__num">01</span>
+      <span class="rp-node__actor">Cliente</span>
+      <h3 class="rp-node__title">Portal de entrada</h3>
+      <p class="rp-node__desc">Home del canal Resale: comprar catálogo pre-owned o vender una prenda.</p>
+    </div>
+
+    <div class="rp-node rp-node--top rp-node--brand" style="left:37.222%;top:33.333%;">
+      <span class="rp-node__icon">↗</span>
+      <span class="rp-node__num">02</span>
+      <span class="rp-node__actor">Cliente → Brownie</span>
+      <h3 class="rp-node__title">Solicitud de venta</h3>
+      <p class="rp-node__desc">La marca valida el producto y tasa desde el Dashboard de Drelife.</p>
+    </div>
+
+    <div class="rp-node rp-node--top rp-node--brand" style="left:62.778%;top:33.333%;">
+      <span class="rp-node__icon">✳</span>
+      <span class="rp-node__num">03</span>
+      <span class="rp-node__actor">Brownie → Cliente</span>
+      <h3 class="rp-node__title">Notificación automática</h3>
+      <p class="rp-node__desc">El cliente recibe la decisión en la app y acepta o rechaza la valoración.</p>
+    </div>
+
+    <div class="rp-node rp-node--top rp-node--client" style="left:88.333%;top:33.333%;">
+      <span class="rp-node__icon">◈</span>
+      <span class="rp-node__num">04</span>
+      <span class="rp-node__actor">Cliente</span>
+      <h3 class="rp-node__title">Preparación del envío</h3>
+      <p class="rp-node__desc">Confirma sus datos. El sistema genera automáticamente la etiqueta de transporte.</p>
+    </div>
+
+    <div class="rp-node rp-node--bottom rp-node--ops" style="left:88.333%;top:66.667%;">
+      <span class="rp-node__icon">▥</span>
+      <span class="rp-node__num">05</span>
+      <span class="rp-node__actor">Drelife · Almacén</span>
+      <h3 class="rp-node__title">Recepción y verificación</h3>
+      <p class="rp-node__desc">Inspección física de la prenda y actualización del estado en el Dashboard.</p>
+    </div>
+
+    <div class="rp-node rp-node--bottom rp-node--brand" style="left:50%;top:66.667%;">
+      <span class="rp-node__icon">◉</span>
+      <span class="rp-node__num">06</span>
+      <span class="rp-node__actor">Brownie · Dashboard</span>
+      <h3 class="rp-node__title">Aprobación del voucher</h3>
+      <p class="rp-node__desc">La marca aprueba el incentivo y el sistema lo envía automáticamente al cliente.</p>
+    </div>
+
+    <div class="rp-node rp-node--bottom rp-node--client" style="left:11.667%;top:66.667%;">
+      <span class="rp-node__icon">▣</span>
+      <span class="rp-node__num">07</span>
+      <span class="rp-node__actor">Cliente</span>
+      <h3 class="rp-node__title">Nueva compra</h3>
+      <p class="rp-node__desc">El cliente vuelve a Brownie y canjea su voucher en una nueva compra.</p>
+    </div>
+  </div>
+
+  <div class="rp-mobile reveal">
+    <div class="rp-mrow"><span class="rp-node__icon rp-node--client"><span>⊙</span></span><div><div class="rp-mnum">01</div><div class="rp-mactor">Cliente</div><div class="rp-mtitle">Portal de entrada</div><p class="rp-mdesc">Home del canal Resale: comprar catálogo pre-owned o vender una prenda.</p></div></div>
+    <div class="rp-mrow"><span class="rp-node__icon rp-node--brand"><span>↗</span></span><div><div class="rp-mnum">02</div><div class="rp-mactor">Cliente → Brownie</div><div class="rp-mtitle">Solicitud de venta</div><p class="rp-mdesc">La marca valida el producto y tasa desde el Dashboard de Drelife.</p></div></div>
+    <div class="rp-mrow"><span class="rp-node__icon rp-node--brand"><span>✳</span></span><div><div class="rp-mnum">03</div><div class="rp-mactor">Brownie → Cliente</div><div class="rp-mtitle">Notificación automática</div><p class="rp-mdesc">El cliente recibe la decisión en la app y acepta o rechaza la valoración.</p></div></div>
+    <div class="rp-mrow"><span class="rp-node__icon rp-node--client"><span>◈</span></span><div><div class="rp-mnum">04</div><div class="rp-mactor">Cliente</div><div class="rp-mtitle">Preparación del envío</div><p class="rp-mdesc">Confirma sus datos. El sistema genera automáticamente la etiqueta de transporte.</p></div></div>
+    <div class="rp-mrow"><span class="rp-node__icon rp-node--ops"><span>▥</span></span><div><div class="rp-mnum">05</div><div class="rp-mactor">Drelife · Almacén</div><div class="rp-mtitle">Recepción y verificación</div><p class="rp-mdesc">Inspección física de la prenda y actualización del estado en el Dashboard.</p></div></div>
+    <div class="rp-mrow"><span class="rp-node__icon rp-node--brand"><span>◉</span></span><div><div class="rp-mnum">06</div><div class="rp-mactor">Brownie · Dashboard</div><div class="rp-mtitle">Aprobación del voucher</div><p class="rp-mdesc">La marca aprueba el incentivo y el sistema lo envía automáticamente al cliente.</p></div></div>
+    <div class="rp-mrow"><span class="rp-node__icon rp-node--client"><span>▣</span></span><div><div class="rp-mnum">07</div><div class="rp-mactor">Cliente</div><div class="rp-mtitle">Nueva compra</div><p class="rp-mdesc">El cliente vuelve a Brownie y canjea su voucher en una nueva compra.</p></div></div>
+  </div>
+
+  <div class="resale-process__note reveal">
+    <span class="resale-process__note-icon">↻</span>
+    <p>Cada prenda recuperada es reacondicionada para poder <strong>volver a ponerse a la venta</strong>. El paso 07 cierra el circuito: cada voucher vuelve a convertirse en <strong>una nueva compra</strong> dentro de Brownie.</p>
+  </div>
+</section>
+
+<!-- ============ 05 · ¿POR QUÉ IMPORTA? ============ -->
+<section class="why-matters" id="retorno">
+  <div class="why-matters__top reveal">
+    <p class="eyebrow eyebrow--dark">05&nbsp;&nbsp;¿POR QUÉ IMPORTA?</p>
+    <h2 class="why-matters__title">
+      Un canal.<br>
+      <span class="lime">Cuatro retornos.</span>
+    </h2>
+  </div>
+
+  <div class="why-matters__grid">
+    <article class="card card--compact card--black reveal">
+      <div class="card__top">
+        <span class="icon-circle">↺</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Reactivación de la compra</h3>
+      <p class="card__desc">Da a la comunidad Brownie una segunda oportunidad de compra, sin salir del ecosistema oficial de la marca.</p>
+    </article>
+
+    <article class="card card--compact card--light reveal">
+      <div class="card__top">
+        <span class="icon-circle">▥</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Inteligencia de demanda</h3>
+      <p class="card__desc">Identifica qué prendas, tallas y colecciones tienen más rotación en el mercado de segunda mano.</p>
+    </article>
+
+    <article class="card card--compact card--lime reveal">
+      <div class="card__top">
+        <span class="icon-circle">◎</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Visibilidad y SEO propios</h3>
+      <p class="card__desc">Cada prenda revendida suma tráfico y presencia de marca en tu propio dominio.</p>
+    </article>
+
+    <article class="card card--compact card--black reveal">
+      <div class="card__top">
+        <span class="icon-circle">▦</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Coherencia de marca</h3>
+      <p class="card__desc">Todo el proceso ocurre bajo la identidad de Brownie, sin fugas hacia plataformas de terceros.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 06 · LANDING PAGE + APP ============ -->
+<section class="ecosystem" id="plataforma">
+  <div class="ecosystem__content reveal">
+    <p class="eyebrow eyebrow--light">06&nbsp;&nbsp;ECOSISTEMA DIGITAL</p>
+    <h2 class="ecosystem__title">
+      Tu canal oficial<br>
+      de segunda mano.<br>
+      <span class="lime">En web y app.</span>
+    </h2>
+    <p class="ecosystem__desc">Un mismo canal, pensado para funcionar igual de bien en el navegador que en el móvil. Catálogo, precios y experiencia de compra sincronizados en tiempo real.</p>
+    <div class="ecosystem__actions">
+      <a href="#plataforma" class="btn btn--lime">Ver Landing</a>
+      <a href="#" id="verAppBtn" class="btn btn--outline">Ver App</a>
+    </div>
+  </div>
+
+  <div class="ecosystem__mockups reveal">
+    <div class="mockup mockup--desktop">
+      <!-- Sustituye landing/index.html por tu landing Second Life de Brownie ya creada -->
+      <iframe src="landing/index.html" style="width:100%; height:100%; border:none; border-radius:var(--radius-m);"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODAL APP ============ -->
+<div class="app-modal" id="appModal" aria-hidden="true">
+  <div class="app-modal__backdrop" data-modal-close></div>
+  <div class="app-modal__panel" role="dialog" aria-modal="true" aria-label="Brownie Second Life — App">
+    <button type="button" class="app-modal__close" data-modal-close aria-label="Cerrar">✕</button>
+    <!-- Sustituye app/index.html por tu selling app de Brownie cuando esté lista -->
+    <iframe class="app-modal__frame" src="app/index.html" title="Brownie Second Life — App"></iframe>
+  </div>
+</div>
+
+<!-- ============ MODAL RESALE ============ -->
+<div class="info-modal" id="resaleModal" aria-hidden="true">
+  <div class="info-modal__backdrop" data-modal-close></div>
+  <div class="info-modal__panel" role="dialog" aria-modal="true" aria-label="Resale — más información">
+    <button type="button" class="info-modal__close" data-modal-close aria-label="Cerrar">✕</button>
+    <span class="eyebrow eyebrow--dark">RESALE</span>
+    <h3 class="info-modal__title">Reventa de prendas oficiales</h3>
+    <ul class="info-modal__list">
+      <li>
+        <strong>Canal Oficial</strong>
+        <p>Clientes de Brownie compran y venden prendas oficiales dentro del ecosistema de la marca.</p>
+      </li>
+      <li>
+        <strong>Certificación</strong>
+        <p>Cada producto pasa por un proceso de verificación que garantiza su autenticidad.</p>
+      </li>
+      <li>
+        <strong>Circularidad</strong>
+        <p>Cada pieza tiene una segunda vida, alargando su valor y vida útil.</p>
+      </li>
+      <li>
+        <strong>Experiencia</strong>
+        <p>Toda compra y venta ocurre bajo la identidad y los estándares de Brownie, de principio a fin.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ 07 · CÓMO TRABAJAMOS ============ -->
+<section class="how-we-work" id="metodologia">
+  <div class="how-we-work__inner">
+    <div class="how-we-work__left reveal">
+      <p class="eyebrow eyebrow--dark">07&nbsp;&nbsp;CÓMO TRABAJAMOS</p>
+      <h2 class="how-we-work__title">
+        Creamos,<br>
+        activamos<br>
+        y gestionamos<br>
+        tu canal<br>
+        para que genere<br>
+        <span class="lime">valor real.</span>
+      </h2>
+    </div>
+
+    <div class="how-we-work__right">
+      <div class="work-block reveal">
+        <span class="work-block__num">01</span>
+        <h3 class="work-block__title">Creamos</h3>
+        <p class="work-block__desc">Diseñamos tu canal oficial de segunda mano: marca, catálogo, precios y experiencia de usuario.</p>
+      </div>
+      <div class="work-block reveal">
+        <span class="work-block__num">02</span>
+        <h3 class="work-block__title">Activamos</h3>
+        <p class="work-block__desc">Lanzamos el canal y ponemos en marcha la operativa de recogida, revisión y publicación.</p>
+      </div>
+      <div class="work-block reveal">
+        <span class="work-block__num">03</span>
+        <h3 class="work-block__title">Gestionamos</h3>
+        <p class="work-block__desc">Operamos el día a día: logística, atención al cliente y gestión de stock de segunda mano.</p>
+      </div>
+      <div class="work-block reveal">
+        <span class="work-block__num">04</span>
+        <h3 class="work-block__title">Optimizamos</h3>
+        <p class="work-block__desc">Analizamos datos reales de venta y ajustamos precios, catálogo y comunicación para maximizar resultados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 · PROCESO DE IMPLEMENTACIÓN ============ -->
+<section class="rollout" id="implementacion">
+  <div class="rollout__top reveal">
+    <p class="eyebrow eyebrow--light">08&nbsp;&nbsp;IMPLEMENTACIÓN</p>
+    <h2 class="rollout__title">
+      De la firma<br>
+      al lanzamiento<br>
+      <span class="lime">en 6 semanas.</span>
+    </h2>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline__item reveal">
+      <div class="timeline__node"><span></span></div>
+      <div class="timeline__body">
+        <div class="timeline__head">
+          <h3 class="timeline__name">Kick-off &amp; Configuración</h3>
+          <span class="timeline__week">Semana 1</span>
+        </div>
+        <ul class="timeline__tasks">
+          <li>Definición de objetivos</li>
+          <li>Configuración de marca y catálogo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline__item reveal">
+      <div class="timeline__node"><span></span></div>
+      <div class="timeline__body">
+        <div class="timeline__head">
+          <h3 class="timeline__name">Storefront &amp; App</h3>
+          <span class="timeline__week">Semanas 2–3</span>
+        </div>
+        <ul class="timeline__tasks">
+          <li>Diseño del canal web</li>
+          <li>Integración con la app</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline__item reveal">
+      <div class="timeline__node"><span></span></div>
+      <div class="timeline__body">
+        <div class="timeline__head">
+          <h3 class="timeline__name">Operativa &amp; Intake</h3>
+          <span class="timeline__week">Semana 4</span>
+        </div>
+        <ul class="timeline__tasks">
+          <li>Flujo de recogida y verificación</li>
+          <li>Formación del equipo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline__item reveal">
+      <div class="timeline__node"><span></span></div>
+      <div class="timeline__body">
+        <div class="timeline__head">
+          <h3 class="timeline__name">Piloto cerrado</h3>
+          <span class="timeline__week">Semana 5</span>
+        </div>
+        <ul class="timeline__tasks">
+          <li>Prueba con grupo reducido de usuarios</li>
+          <li>Ajustes finales</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline__item timeline__item--lime reveal">
+      <div class="timeline__node"><span></span></div>
+      <div class="timeline__body">
+        <div class="timeline__head">
+          <h3 class="timeline__name">Go Live</h3>
+          <span class="timeline__week">Semana 6</span>
+        </div>
+        <ul class="timeline__tasks">
+          <li>Lanzamiento</li>
+          <li>Monitorización en tiempo real</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 · VALOR PARA LAS MARCAS ============ -->
+<section class="brand-value" id="marcas">
+  <div class="brand-value__top reveal">
+    <p class="eyebrow eyebrow--light">09&nbsp;&nbsp;VALOR PARA LAS MARCAS</p>
+    <h2 class="brand-value__title">
+      Más que segunda mano.<br>
+      <span class="lime">Un nuevo activo para Brownie.</span>
+    </h2>
+    <p class="brand-value__subtitle">La circularidad no solo genera impacto ambiental, también crea nuevas oportunidades de negocio y fortalece la relación entre la marca y su comunidad.</p>
+  </div>
+
+  <div class="brand-value__grid">
+    <article class="card card--compact card--black reveal">
+      <div class="card__top">
+        <span class="icon-circle">♻</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Sostenibilidad real</h3>
+      <p class="card__desc">Alarga la vida útil de tus prendas y reduce el impacto ambiental de toda tu cadena de valor.</p>
+    </article>
+
+    <article class="card card--compact card--light reveal">
+      <div class="card__top">
+        <span class="icon-circle">↗</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Nuevas fuentes de ingresos</h3>
+      <p class="card__desc">Convierte cada prenda revendida en un nuevo punto de facturación, sin coste de producción.</p>
+    </article>
+
+    <article class="card card--compact card--lime reveal">
+      <div class="card__top">
+        <span class="icon-circle">♥</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Fidelización de la comunidad</h3>
+      <p class="card__desc">Acompaña a tu comunidad en todo el ciclo de vida de la prenda y refuerza su vínculo con la marca.</p>
+    </article>
+
+    <article class="card card--compact card--black reveal">
+      <div class="card__top">
+        <span class="icon-circle">▥</span>
+        <span class="card__arrow">↗</span>
+      </div>
+      <h3 class="card__title">Datos e inteligencia</h3>
+      <p class="card__desc">Accede a información real sobre uso, estado y demanda de tus prendas en el mercado secundario.</p>
+    </article>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <span class="header__logo">Drelife</span>
+    <p>&copy; 2026 Drelife. Segunda vida para la moda.</p>
+  </div>
+</footer>
+
+<script>
+/* ===========================================================
+   DRELIFE — interacciones
+=========================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------- Header: cambia de fondo al hacer scroll ---------- */
+  const header = document.getElementById('header');
+  const onScroll = () => {
+    if (window.scrollY > 24) header.classList.add('is-scrolled');
+    else header.classList.remove('is-scrolled');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---------- Menú móvil ---------- */
+  const burgerBtn = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burgerBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('is-open');
+    burgerBtn.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('is-open');
+      burgerBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ---------- Animaciones de entrada (IntersectionObserver) ---------- */
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  /* ---------- Rail nav: sección activa según scroll ---------- */
+  const railItems = document.querySelectorAll('.rail-nav__item[href]');
+  const railTargets = Array.from(railItems).map(item => document.querySelector(item.getAttribute('href')));
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = railTargets.indexOf(entry.target);
+        railItems.forEach(i => i.classList.remove('is-active'));
+        if (idx > -1) railItems[idx].classList.add('is-active');
+      }
+    });
+  }, { threshold: 0.5 });
+  railTargets.forEach(t => { if (t) sectionObserver.observe(t); });
+
+  /* ---------- Modal de la App (Real Betis Second Life) ---------- */
+  const appModal = document.getElementById('appModal');
+  const verAppBtn = document.getElementById('verAppBtn');
+
+  function openAppModal() {
+    appModal.classList.add('is-open');
+    appModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAppModal() {
+    appModal.classList.remove('is-open');
+    appModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (verAppBtn) verAppBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    openAppModal();
+  });
+
+  appModal.querySelectorAll('[data-modal-close]').forEach(el => {
+    el.addEventListener('click', closeAppModal);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && appModal.classList.contains('is-open')) closeAppModal();
+  });
+
+  /* ---------- Modal de información (Resale) ---------- */
+  const resaleModal = document.getElementById('resaleModal');
+  const resaleInfoBtn = document.getElementById('resaleInfoBtn');
+
+  function openResaleModal() {
+    resaleModal.classList.add('is-open');
+    resaleModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeResaleModal() {
+    resaleModal.classList.remove('is-open');
+    resaleModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (resaleInfoBtn) resaleInfoBtn.addEventListener('click', openResaleModal);
+
+  resaleModal.querySelectorAll('[data-modal-close]').forEach(el => {
+    el.addEventListener('click', closeResaleModal);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && resaleModal.classList.contains('is-open')) closeResaleModal();
+  });
+
+  /* ---------- Scroll suave para enlaces internos ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const targetId = anchor.getAttribute('href');
+      if (targetId.length <= 1) return;
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+});
+</script>
+</body>
+</html>
