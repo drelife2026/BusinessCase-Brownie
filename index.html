@@ -1227,9 +1227,12 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
   color:var(--bg);
   flex:none;
 }
-.rp-node--client .rp-node__icon{ border-color:var(--lime); color:var(--bg); }
-.rp-node--brand .rp-node__icon{ background:var(--bg); border-color:var(--bg); color:var(--white); }
-.rp-node--ops .rp-node__icon{ background:#F1E9DC; border-color:var(--line-light); color:var(--bg); }
+.rp-node--client .rp-node__icon,
+.rp-node__icon.rp-node--client{ border-color:var(--lime); color:var(--bg); }
+.rp-node--brand .rp-node__icon,
+.rp-node__icon.rp-node--brand{ background:var(--bg); border-color:var(--bg); color:var(--white); }
+.rp-node--ops .rp-node__icon,
+.rp-node__icon.rp-node--ops{ background:#F1E9DC; border-color:var(--line-light); color:var(--bg); }
 
 .rp-node__num{
   font-size:12px;
@@ -1278,7 +1281,7 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
   border-top:1px solid var(--line);
 }
 .rp-mobile .rp-mrow:first-child{ border-top:none; }
-.rp-mobile .rp-node__icon{ width:44px; height:44px; font-size:16px; }
+.rp-mobile .rp-node__icon{ width:56px; height:56px; font-size:20px; }
 .rp-mnum{
   font-size:11px;
   font-weight:800;
