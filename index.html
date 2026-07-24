@@ -449,7 +449,10 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
    02 · ¿POR QUÉ AHORA?
 ========================================================= */
 .why-now{
-  background:var(--bg);
+  background:
+    linear-gradient(180deg, rgba(29,23,18,.82) 0%, rgba(29,23,18,.9) 100%),
+    url('imagenes/unnamed2.jpg') center/cover no-repeat,
+    var(--bg);
   padding:100px 40px;
 }
 .why-now__top{ max-width:1400px; margin:0 auto; }
@@ -466,6 +469,7 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
   font-size:16px;
   line-height:1.6;
 }
+.why-now__stats-btn{ margin-top:28px; }
 .why-now__flow{
   max-width:1400px;
   margin:64px auto 0;
@@ -516,6 +520,22 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
 .why-now__note p{ font-size:17px; line-height:1.5; }
 .why-now__note strong{ color:var(--lime); }
 
+.why-now__signals{
+  max-width:1400px;
+  margin:20px auto 0;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+.why-now__signal{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+}
+.why-now__signal-icon{ font-size:13px; color:var(--lime); flex:none; margin-top:2px; }
+.why-now__signal p{ font-size:13px; line-height:1.45; color:var(--gray); }
+.why-now__signal strong{ color:var(--white); font-weight:700; }
+
 /* =========================================================
    04 · VALOR PARA LAS MARCAS
 ========================================================= */
@@ -543,6 +563,55 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
   display:grid;
   grid-template-columns:repeat(4, 1fr);
   gap:20px;
+}
+
+.brand-value__data{
+  max-width:1400px;
+  margin:56px auto 0;
+  padding-top:40px;
+  border-top:1px solid var(--line-light);
+}
+.brand-value__data-title{
+  font-family:var(--font-serif);
+  font-weight:600;
+  font-size:clamp(22px, 2.6vw, 30px);
+  letter-spacing:-.01em;
+  line-height:1.2;
+  margin-bottom:32px;
+}
+.brand-value__data-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:32px;
+}
+.data-col__label{
+  display:block;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--gray-dim);
+  margin-bottom:14px;
+}
+.data-col__list{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.data-col__list li{
+  font-size:14px;
+  color:var(--gray-dim);
+  line-height:1.4;
+  padding-left:14px;
+  position:relative;
+}
+.data-col__list li::before{
+  content:'';
+  position:absolute;
+  left:0; top:8px;
+  width:5px; height:1px;
+  background:var(--gray-dim);
 }
 
 /* =========================================================
@@ -770,6 +839,56 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
   opacity:.75;
 }
 
+/* ---------- Stat chart (used inside modals) ---------- */
+.stat-chart{
+  margin-top:28px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.stat-chart__row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:4px 12px;
+}
+.stat-chart__label{
+  grid-column:1;
+  font-size:13px;
+  font-weight:700;
+  color:var(--bg);
+}
+.stat-chart__value{
+  grid-column:2;
+  font-size:13px;
+  font-weight:800;
+  color:var(--bg);
+}
+.stat-chart__track{
+  grid-column:1 / -1;
+  position:relative;
+  height:8px;
+  border-radius:100px;
+  background:var(--line-light);
+  overflow:hidden;
+}
+.stat-chart__fill{
+  position:absolute;
+  left:0; top:0; height:100%;
+  border-radius:100px;
+  background:var(--gray-dim);
+}
+.stat-chart__fill--accent{ background:var(--lime); }
+.stat-chart__note{
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid var(--line-light);
+  font-size:12px;
+  line-height:1.55;
+  color:var(--gray-dim);
+}
+.stat-chart__note strong{ color:var(--bg); }
+
 /* =========================================================
    08 · CÓMO TRABAJAMOS
 ========================================================= */
@@ -940,6 +1059,7 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
 .offer{
   background:var(--bg);
   padding:100px 40px;
+  border-top:1px solid rgba(250,246,238,.16);
 }
 .offer__top{
   max-width:1400px;
@@ -1240,12 +1360,14 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
 
   .why-now__flow{ flex-wrap:wrap; row-gap:32px; }
   .why-now__step{ flex:1 1 40%; }
+  .why-now__signals{ grid-template-columns:repeat(2,1fr); row-gap:20px; }
 
   .rp-track-outer{ display:none; }
   .rp-mobile{ display:flex; }
 
   .brand-value__grid,
   .why-matters__grid{ grid-template-columns:repeat(2,1fr); }
+  .brand-value__data-grid{ grid-template-columns:repeat(2,1fr); row-gap:32px; }
 
   .ecosystem{ grid-template-columns:1fr; }
   .ecosystem__mockups{ margin-top:20px; }
@@ -1261,6 +1383,11 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
 @media (max-width: 640px){
   .header__inner{ padding:14px 20px; }
   .header__logo{ font-size:16px; }
+
+  .info-modal{ padding:16px; }
+  .info-modal__panel{ padding:28px 22px; max-height:88vh; }
+  .info-modal__title{ font-size:22px; }
+  .stat-chart__label{ font-size:12.5px; }
 
   .hero{ padding:100px 20px 0; align-items:flex-start; }
   .hero__title{ font-size:clamp(38px, 12vw, 56px); }
@@ -1296,6 +1423,7 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
   .why-now__step{ flex-direction:row; text-align:left; }
   .why-now__arrow{ transform:rotate(90deg); margin:0 0 0 22px; }
   .why-now__note{ flex-direction:column; align-items:flex-start; gap:10px; }
+  .why-now__signals{ grid-template-columns:1fr; gap:16px; }
 
   .footer__inner{ flex-direction:column; gap:14px; align-items:flex-start; }
   .footer__doc-link{ border-radius:16px; max-width:100%; }
@@ -1311,6 +1439,8 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
     padding:0 20px 8px;
   }
   .brand-value__grid .card{ min-width:78%; scroll-snap-align:start; }
+  .brand-value__data{ margin-top:44px; padding-top:32px; }
+  .brand-value__data-grid{ grid-template-columns:1fr; gap:28px; }
 
   .why-matters{ padding:70px 20px; }
   .why-matters__grid{
@@ -1386,9 +1516,9 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
     <p class="eyebrow">BROWNIE&nbsp;x&nbsp;DRELIFE&nbsp;·&nbsp; el siguiente capítulo de cada prenda Brownie.
 </p>
     <h1 class="hero__title">
-      Prendas que pueden<br>
-      cambiar de armario.<br>
-      <span class="lime">Dentro del universo Brownie</span>
+      Tu segunda mano ya existe.<br>
+      Crea tu propio canal,<br>
+      <span class="lime">Dentro del universo Brownie.</span>
     </h1>
     <p class="hero__desc">Un ecosistema desde donde comprar, vender y compartir de forma segura las prendas de la comunidad Brownie dentro del propio canal de la marca.</p>
     <a href="#servicios" class="hero__cta">
@@ -1404,19 +1534,19 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
       <span class="stat-source">Fuente: ThredUp, 2026 Resale Report (GlobalData)</span>
     </div>
     <div class="metric">
-      <span class="metric__value">60%</span>
-      <span class="metric__label">de los españoles ha comprado ropa de segunda mano alguna vez</span>
-      <span class="stat-source">Fuente: EAE Business School, Informe Ropa de Segunda Mano 2025</span>
+      <span class="metric__value">3x</span>
+      <span class="metric__label">más rápido crece el resale frente al retail tradicional</span>
+      <span class="stat-source">Fuente: ThredUp, 2026 Resale Report (GlobalData)</span>
     </div>
     <div class="metric">
-      <span class="metric__value">473.000t</span>
-      <span class="metric__label">de CO₂ evitadas por la compraventa de artículos de segunda mano en España en 2025</span>
-      <span class="stat-source">Fuente: Wallapop, Modelo de Impacto</span>
+      <span class="metric__value">+100</span>
+      <span class="metric__label">grandes marcas de moda ya operan su propio programa oficial de segunda mano</span>
+      <span class="stat-source">Fuente: ThredUp, Resale-as-a-Service Brand Directory 2025</span>
     </div>
     <div class="metric">
-      <span class="metric__value">90%</span>
-      <span class="metric__label">de los menores de 35 años ha comprado en plataformas de segunda mano</span>
-      <span class="stat-source">Fuente: Wallapop, informe de tendencias de moda 2025</span>
+      <span class="metric__value">83%</span>
+      <span class="metric__label">de Millennials y Generación Z ya compran moda de segunda mano</span>
+      <span class="stat-source">Fuente: ThredUp, 2026 Resale Report (GlobalData)</span>
     </div>
   </div>
 </section>
@@ -1431,7 +1561,7 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
         <span class="lime">después del primer armario.</span>
       </h2>
       <div class="services__copy">
-        <p>Drelife convierte construye un canal propio de segunda vida, donde cada prenda sigue formando parte del universo Brownie.</p>
+        <p>Drelife construye un canal propio de segunda vida, donde cada prenda sigue formando parte del universo Brownie.</p>
         <a href="#productos" class="link-arrow">Ver cómo funciona <span>↗</span></a>
       </div>
     </div>
@@ -1445,8 +1575,8 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
       </div>
       <h3 class="card__title">Resale</h3>
       <p class="card__desc">Reventa de prendas pre-owned en tu canal oficial de segunda mano.</p>
-      <div class="card__img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg),var(--bg-soft));">
-        <span style="font-size:32px;color:var(--lime,#F4A6C1);">↻</span>
+      <div class="card__img">
+        <img src="imagenes/card-resale.jpg" alt="Prenda de segunda mano lista para revender">
       </div>
       <button type="button" id="resaleInfoBtn" class="btn btn--outline-lime btn--sm card__info-btn">Más información</button>
     </article>
@@ -1458,8 +1588,8 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
       </div>
       <h3 class="card__title">Repairs</h3>
       <p class="card__desc">Reparación y revisión de cada prenda para alargar su vida útil.</p>
-      <div class="card__img" style="display:flex;align-items:center;justify-content:center;background:var(--line-light);">
-        <span style="font-size:32px;">✂</span>
+      <div class="card__img">
+        <img src="imagenes/card-repairs.jpg" alt="Reparación de una prenda a máquina">
       </div>
     </article>
 
@@ -1470,8 +1600,8 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
       </div>
       <h3 class="card__title">Recycle</h3>
       <p class="card__desc">Convertimos residuos textiles en nuevos recursos y cerramos el ciclo de vida de la prenda.</p>
-      <div class="card__img" style="display:flex;align-items:center;justify-content:center;background:rgba(29,23,18,.08);">
-        <span style="font-size:32px;">♻</span>
+      <div class="card__img">
+        <img src="imagenes/card-recycle.jpg" alt="Prendas denim recicladas">
       </div>
     </article>
 
@@ -1482,8 +1612,8 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
       </div>
       <h3 class="card__title">Returns</h3>
       <p class="card__desc">Gestiona devoluciones de forma inteligente y reduce su impacto ambiental.</p>
-      <div class="card__img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg),var(--bg-soft));">
-        <span style="font-size:32px;color:var(--lime,#F4A6C1);">▤</span>
+      <div class="card__img">
+        <img src="imagenes/card-returns.jpg" alt="Percha con prendas devueltas listas para revisión">
       </div>
     </article>
   </div>
@@ -1498,6 +1628,7 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
       <span class="lime">ya se mueve sin las marcas.</span>
     </h2>
     <p class="why-now__subtitle">Miles de prendas Brownie cambian de propietaria cada año. Pero lo hacen fuera de su control, en plataformas de terceros. Mientras el mercado de segunda mano continúa creciendo, las marcas pierden visibilidad, relación con sus clientas e información sobre el recorrido de sus productos.</p>
+    <button type="button" id="statsInfoBtn" class="btn btn--outline-lime btn--sm why-now__stats-btn">Estadísticas</button>
   </div>
 
   <div class="why-now__flow reveal">
@@ -1525,6 +1656,25 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
   <div class="why-now__note reveal">
     <span class="why-now__note-icon">⚠</span>
     <p>Después de la primera compra, <strong>Brownie desaparece de la experiencia.</strong></p>
+  </div>
+
+  <div class="why-now__signals reveal">
+    <div class="why-now__signal">
+      <span class="why-now__signal-icon">↑</span>
+      <p>El mercado resale <strong>sigue creciendo</strong> año tras año.</p>
+    </div>
+    <div class="why-now__signal">
+      <span class="why-now__signal-icon">⊕</span>
+      <p>Cada vez <strong>más marcas lanzan</strong> su programa propio.</p>
+    </div>
+    <div class="why-now__signal">
+      <span class="why-now__signal-icon">◎</span>
+      <p>Una nueva y habitual <strong>forma de consumir.</strong></p>
+    </div>
+    <div class="why-now__signal">
+      <span class="why-now__signal-icon">⚠</span>
+      <p>Sin canal propio, la marca <strong>pierde ingresos y datos.</strong></p>
+    </div>
   </div>
 </section>
 
@@ -1684,29 +1834,29 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
   <div class="why-matters__grid">
     <article class="card card--compact card--black reveal">
       <div class="card__top">
-        <span class="icon-circle">↺</span>
+        <span class="icon-circle">↗</span>
         <span class="card__arrow">↗</span>
       </div>
-      <h3 class="card__title">Reactivación de la compra</h3>
-      <p class="card__desc">Da a la comunidad Brownie una segunda oportunidad de compra, sin salir del ecosistema oficial de la marca.</p>
+      <h3 class="card__title">Nueva fuente de ingresos</h3>
+      <p class="card__desc">Cada prenda revendida factura de nuevo, sin coste de producción.</p>
     </article>
 
     <article class="card card--compact card--light reveal">
       <div class="card__top">
-        <span class="icon-circle">▥</span>
+        <span class="icon-circle">♥</span>
         <span class="card__arrow">↗</span>
       </div>
-      <h3 class="card__title">Inteligencia de demanda</h3>
-      <p class="card__desc">Identifica qué prendas, tallas y colecciones tienen más rotación en el mercado de segunda mano.</p>
+      <h3 class="card__title">Mayor fidelización</h3>
+      <p class="card__desc">Acompaña a tu cliente en todo el ciclo de vida de la prenda y refuerza su vínculo con la marca.</p>
     </article>
 
     <article class="card card--compact card--lime reveal">
       <div class="card__top">
-        <span class="icon-circle">◎</span>
+        <span class="icon-circle">▥</span>
         <span class="card__arrow">↗</span>
       </div>
-      <h3 class="card__title">Visibilidad y SEO propios</h3>
-      <p class="card__desc">Cada prenda revendida suma tráfico y presencia de marca en tu propio dominio.</p>
+      <h3 class="card__title">Datos e inteligencia</h3>
+      <p class="card__desc">Información real de demanda para decidir con criterio, no con intuición.</p>
     </article>
 
     <article class="card card--compact card--black reveal">
@@ -1714,8 +1864,8 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
         <span class="icon-circle">▦</span>
         <span class="card__arrow">↗</span>
       </div>
-      <h3 class="card__title">Coherencia de marca</h3>
-      <p class="card__desc">Todo el proceso ocurre bajo la identidad de Brownie, sin fugas hacia plataformas de terceros.</p>
+      <h3 class="card__title">Control del canal oficial</h3>
+      <p class="card__desc">Toda la experiencia ocurre bajo tu marca, sin fugas hacia plataformas de terceros.</p>
     </article>
   </div>
 </section>
@@ -1782,6 +1932,52 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
   </div>
 </div>
 
+<!-- ============ MODAL ESTADÍSTICAS ============ -->
+<div class="info-modal" id="statsModal" aria-hidden="true">
+  <div class="info-modal__backdrop" data-modal-close></div>
+  <div class="info-modal__panel" role="dialog" aria-modal="true" aria-label="Estadísticas — programas de circularidad">
+    <button type="button" class="info-modal__close" data-modal-close aria-label="Cerrar">✕</button>
+    <span class="eyebrow eyebrow--dark">DATOS DEL SECTOR</span>
+    <h3 class="info-modal__title">Dónde invierten las marcas en circularidad</h3>
+    <p style="font-size:14px;line-height:1.55;color:var(--gray-dim);margin-top:10px;">Reparto de los programas de circularidad lanzados por marcas de moda en 2025.</p>
+
+    <div class="stat-chart">
+      <div class="stat-chart__row">
+        <span class="stat-chart__label">Resale</span>
+        <span class="stat-chart__value">37,5%</span>
+        <div class="stat-chart__track"><div class="stat-chart__fill stat-chart__fill--accent" style="width:37.5%"></div></div>
+      </div>
+      <div class="stat-chart__row">
+        <span class="stat-chart__label">Repair</span>
+        <span class="stat-chart__value">27,5%</span>
+        <div class="stat-chart__track"><div class="stat-chart__fill" style="width:27.5%"></div></div>
+      </div>
+      <div class="stat-chart__row">
+        <span class="stat-chart__label">Upcycling</span>
+        <span class="stat-chart__value">10%</span>
+        <div class="stat-chart__track"><div class="stat-chart__fill" style="width:10%"></div></div>
+      </div>
+      <div class="stat-chart__row">
+        <span class="stat-chart__label">Uso de fibras recicladas T2T</span>
+        <span class="stat-chart__value">10%</span>
+        <div class="stat-chart__track"><div class="stat-chart__fill" style="width:10%"></div></div>
+      </div>
+      <div class="stat-chart__row">
+        <span class="stat-chart__label">Nuevos usos de materiales</span>
+        <span class="stat-chart__value">10%</span>
+        <div class="stat-chart__track"><div class="stat-chart__fill" style="width:10%"></div></div>
+      </div>
+      <div class="stat-chart__row">
+        <span class="stat-chart__label">Rental</span>
+        <span class="stat-chart__value">5%</span>
+        <div class="stat-chart__track"><div class="stat-chart__fill" style="width:5%"></div></div>
+      </div>
+    </div>
+
+    <p class="stat-chart__note"><strong>Resale es ya la principal prioridad</strong> de circularidad para las marcas de moda, por delante de repair, upcycling y otras iniciativas. Datos: 80 programas y casos de uso lanzados por marcas de moda y apparel en 2025.</p>
+  </div>
+</div>
+
 <!-- ============ 07 · CÓMO TRABAJAMOS ============ -->
 <section class="how-we-work" id="metodologia">
   <div class="how-we-work__inner">
@@ -1801,22 +1997,61 @@ button{ font-family:inherit; border:none; background:none; cursor:pointer; color
       <div class="work-block reveal">
         <span class="work-block__num">01</span>
         <h3 class="work-block__title">Creamos</h3>
-        <p class="work-block__desc">Diseñamos tu canal oficial de segunda mano: marca, catálogo, precios y experiencia de usuario.</p>
+        <p class="work-block__desc">Diseñamos tu canal oficial de segunda mano: marca, catálogo, precios y experiencia de usuario, con el criterio estratégico de nuestro equipo.</p>
       </div>
       <div class="work-block reveal">
         <span class="work-block__num">02</span>
         <h3 class="work-block__title">Activamos</h3>
-        <p class="work-block__desc">Lanzamos el canal y ponemos en marcha la operativa de recogida, revisión y publicación.</p>
+        <p class="work-block__desc">Ponemos en marcha la infraestructura operativa: recogida, verificación, reacondicionamiento y publicación del stock.</p>
       </div>
       <div class="work-block reveal">
         <span class="work-block__num">03</span>
         <h3 class="work-block__title">Gestionamos</h3>
-        <p class="work-block__desc">Operamos el día a día: logística, atención al cliente y gestión de stock de segunda mano.</p>
+        <p class="work-block__desc">Operamos el día a día de principio a fin: logística, atención al cliente y gestión de stock, para que tu equipo no tenga que hacerlo.</p>
       </div>
       <div class="work-block reveal">
         <span class="work-block__num">04</span>
         <h3 class="work-block__title">Optimizamos</h3>
-        <p class="work-block__desc">Analizamos datos reales de venta y ajustamos precios, catálogo y comunicación para maximizar resultados.</p>
+        <p class="work-block__desc">Acompañamos con datos reales de venta y recomendaciones estratégicas para maximizar el rendimiento del canal.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="brand-value__data reveal">
+    <p class="brand-value__data-title">Los datos que empezarás a obtener <span class="lime">desde el primer día</span></p>
+    <div class="brand-value__data-grid">
+      <div class="data-col">
+        <span class="data-col__label">Producto</span>
+        <ul class="data-col__list">
+          <li>Estado real de las prendas</li>
+          <li>Valor residual</li>
+          <li>Durabilidad</li>
+        </ul>
+      </div>
+      <div class="data-col">
+        <span class="data-col__label">Cliente</span>
+        <ul class="data-col__list">
+          <li>Qué vende</li>
+          <li>Qué recompra</li>
+          <li>Uso del voucher</li>
+        </ul>
+      </div>
+      <div class="data-col">
+        <span class="data-col__label">Mercado</span>
+        <ul class="data-col__list">
+          <li>Categorías con mayor demanda</li>
+          <li>Tiempo medio de venta</li>
+          <li>Rotación</li>
+        </ul>
+      </div>
+      <div class="data-col">
+        <span class="data-col__label">Negocio</span>
+        <ul class="data-col__list">
+          <li>GMV generado</li>
+          <li>Conversión</li>
+          <li>Clientes recurrentes</li>
+          <li>Nuevos ingresos</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -2073,6 +2308,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && resaleModal.classList.contains('is-open')) closeResaleModal();
+  });
+
+  /* ---------- Modal de información (Estadísticas) ---------- */
+  const statsModal = document.getElementById('statsModal');
+  const statsInfoBtn = document.getElementById('statsInfoBtn');
+
+  function openStatsModal() {
+    statsModal.classList.add('is-open');
+    statsModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeStatsModal() {
+    statsModal.classList.remove('is-open');
+    statsModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (statsInfoBtn) statsInfoBtn.addEventListener('click', openStatsModal);
+
+  statsModal.querySelectorAll('[data-modal-close]').forEach(el => {
+    el.addEventListener('click', closeStatsModal);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && statsModal.classList.contains('is-open')) closeStatsModal();
   });
 
   /* ---------- Scroll suave para enlaces internos ---------- */
