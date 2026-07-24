@@ -403,7 +403,6 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
       </button>
       <a data-go="home">Inicio</a>
-      <a data-cat="mujer">Mujer</a>
       <a data-cat="accesorios">Accesorios</a>
     </nav>
 
@@ -428,10 +427,6 @@
 
   <script>
     // ---------- DATOS ----------
-    const CATS = [
-      { key:'mujer', label:'Mujer' },
-      { key:'accesorios', label:'Accesorios' }
-    ];
     const CAT_LABEL = { mujer:'Mujer', accesorios:'Accesorios' };
 
     const ROPA = [
@@ -443,6 +438,12 @@
       mujer: ROPA.slice(),
       accesorios: ['BOLSOS', 'GORROS | SOMBREROS', 'ZAPATOS', 'CINTURONES', 'BISUTERÍA', 'PAÑUELOS']
     };
+    // Página inicial: los tipos de "Mujer" aparecen directos (sin pasar por la categoría),
+    // y "Accesorios" se queda al final con sus subcategorías dentro.
+    const FRONT_ITEMS =
+      ROPA.map((label, i) => ({ direct:true, category:'mujer', subIndex:i, label:label })).concat([
+        { direct:false, key:'accesorios', label:'Accesorios' }
+      ]);
 
     const CONDITIONS = [
       { t:'Nuevo*', s:'Nunca usado, con etiquetas' },
@@ -544,11 +545,21 @@
       appMain.innerHTML =
         '<h1 class="q">¿A qué producto te gustaría dar una segunda vida?</h1>' +
         '<div class="list">' +
-          CATS.map(c => '<button class="row" data-cat="' + c.key + '"><span class="label">' + c.label + '</span>' + CHEV + '</button>').join('') +
+          FRONT_ITEMS.map((it, i) => '<button class="row" data-front="' + i + '"><span class="label">' + it.label + '</span>' + CHEV + '</button>').join('') +
         '</div>';
       appFooter.innerHTML = '';
-      appMain.querySelectorAll('[data-cat]').forEach(b => {
-        b.addEventListener('click', () => { state.category = b.dataset.cat; go(2); });
+      appMain.querySelectorAll('[data-front]').forEach(b => {
+        b.addEventListener('click', () => {
+          const it = FRONT_ITEMS[+b.dataset.front];
+          if (it.direct){
+            state.category = it.category;
+            state.subcategory = SUBCATS[it.category][it.subIndex];
+            go(3);
+          } else {
+            state.category = it.key;
+            go(2);
+          }
+        });
       });
     }
 
